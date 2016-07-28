@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>PanAndZoom by wieslawsoltes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">PanAndZoom</h1>
+      <h2 class="project-tagline">Pan and zoom control for WPF and Avalonia.</h2>
+      <a href="https://github.com/wieslawsoltes/MatrixPanAndZoomDemo" class="btn">View on GitHub</a>
+      <a href="https://github.com/wieslawsoltes/MatrixPanAndZoomDemo/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/wieslawsoltes/MatrixPanAndZoomDemo/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="panandzoom" class="anchor" href="#panandzoom" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PanAndZoom</h1>
+
+<p><a href="https://gitter.im/wieslawsoltes/MatrixPanAndZoomDemo?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/wieslawsoltes/MatrixPanAndZoomDemo.svg" alt="Gitter"></a>
+<a href="https://ci.appveyor.com/project/wieslawsoltes/matrixpanandzoomdemo/branch/master"><img src="https://ci.appveyor.com/api/projects/status/2l6o2ondbbn6mmwh/branch/master?svg=true" alt="Build status"></a>
+<a href="https://travis-ci.org/wieslawsoltes/MatrixPanAndZoomDemo"><img src="https://travis-ci.org/wieslawsoltes/MatrixPanAndZoomDemo.svg?branch=master" alt="Build Status"></a></p>
+
+<p>PanAndZoom control for WPF and Avalonia</p>
+
+<p><a href="https://www.youtube.com/watch?v=dM_cRdEuksU"><img src="https://i.ytimg.com/vi/dM_cRdEuksU/hqdefault.jpg" alt=""></a></p>
+
+<h2>
+<a id="nuget" class="anchor" href="#nuget" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NuGet</h2>
+
+<p>PanAndZoom is delivered as a NuGet package.</p>
+
+<p>You can find the packages here <a href="https://www.nuget.org/packages/PanAndZoom/">NuGet</a> or by using nightly build feed:</p>
+
+<ul>
+<li>Add <code>https://www.myget.org/F/panandzoom-nightly/api/v2</code> to your package sources</li>
+<li>Update your package using <code>PanAndZoom</code> feed</li>
+</ul>
+
+<p>You can install the package for <code>Avalonia</code> based projects like this:</p>
+
+<p><code>Install-Package Avalonia.Controls.PanAndZoom -Pre</code></p>
+
+<p>You can install the package for <code>WPF</code> based projects like this:</p>
+
+<p><code>Install-Package Wpf.Controls.PanAndZoom -Pre</code></p>
+
+<h3>
+<a id="package-dependencies" class="anchor" href="#package-dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Package Dependencies</h3>
+
+<ul>
+<li>Avalonia</li>
+<li>System.Reactive</li>
+<li>System.Reactive.Core</li>
+<li>System.Reactive.Interfaces</li>
+<li>System.Reactive.Linq</li>
+<li>System.Reactive.PlatformServices</li>
+<li>Serilog</li>
+<li>Splat</li>
+<li>Sprache</li>
+</ul>
+
+<h3>
+<a id="package-sources" class="anchor" href="#package-sources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Package Sources</h3>
+
+<ul>
+<li><a href="https://www.nuget.org/api/v2/">https://www.nuget.org/api/v2/</a></li>
+<li><a href="https://www.myget.org/F/panandzoom-nightly/api/v2">https://www.myget.org/F/panandzoom-nightly/api/v2</a></li>
+</ul>
+
+<h2>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h2>
+
+<ul>
+<li><a href="https://github.com/wieslawsoltes/MatrixPanAndZoomDemo">GitHub source code repository.</a></li>
+</ul>
+
+<h2>
+<a id="using-panandzoom" class="anchor" href="#using-panandzoom" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using PanAndZoom</h2>
+
+<p>You can also use custom xmlns definition for <code>ZoomBorder</code> control: <code>xmlns:paz="https://github.com/panandzoom"</code>.</p>
+
+<h3>
+<a id="avalonia" class="anchor" href="#avalonia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Avalonia</h3>
+
+<p><code>MainWindow.xaml</code></p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">Window</span> <span class="pl-e">x</span><span class="pl-e">:</span><span class="pl-e">Class</span>=<span class="pl-s"><span class="pl-pds">"</span>AvaloniaDemo.MainWindow<span class="pl-pds">"</span></span>
+        <span class="pl-e">xmlns</span>=<span class="pl-s"><span class="pl-pds">"</span>https://github.com/avaloniaui<span class="pl-pds">"</span></span>
+        <span class="pl-e">xmlns</span><span class="pl-e">:</span><span class="pl-e">x</span>=<span class="pl-s"><span class="pl-pds">"</span>http://schemas.microsoft.com/winfx/2006/xaml<span class="pl-pds">"</span></span>
+        <span class="pl-e">xmlns</span><span class="pl-e">:</span><span class="pl-e">paz</span>=<span class="pl-s"><span class="pl-pds">"</span>clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom<span class="pl-pds">"</span></span>
+        <span class="pl-e">UseLayoutRounding</span>=<span class="pl-s"><span class="pl-pds">"</span>True<span class="pl-pds">"</span></span>
+        <span class="pl-e">Title</span>=<span class="pl-s"><span class="pl-pds">"</span>PanAndZoom Avalonia Demo<span class="pl-pds">"</span></span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>640<span class="pl-pds">"</span></span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>640<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">Grid</span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>SlateBlue<span class="pl-pds">"</span></span> <span class="pl-e">RowDefinitions</span>=<span class="pl-s"><span class="pl-pds">"</span>Auto,*,24<span class="pl-pds">"</span></span> <span class="pl-e">ColumnDefinitions</span>=<span class="pl-s"><span class="pl-pds">"</span>50,*,50<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">StackPanel</span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>#1FFFFFFF<span class="pl-pds">"</span></span> <span class="pl-e">Margin</span>=<span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span> 
+                    <span class="pl-e">HorizontalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Center<span class="pl-pds">"</span></span> <span class="pl-e">VerticalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Top<span class="pl-pds">"</span></span> 
+                    Grid.Row=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> Grid.Column=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>E - Extent<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>F - Fill<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>R - Reset<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>T - Toggle AutoFitMode<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>Mouse Wheel - Zoom to Point<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>Mouse Right Button Down - Pan<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+        &lt;/<span class="pl-ent">StackPanel</span>&gt;
+        &lt;<span class="pl-ent">paz</span><span class="pl-ent">:</span><span class="pl-ent">ZoomBorder</span> <span class="pl-e">Name</span>=<span class="pl-s"><span class="pl-pds">"</span>zoomBorder<span class="pl-pds">"</span></span> <span class="pl-e">AutoFitMode</span>=<span class="pl-s"><span class="pl-pds">"</span>None<span class="pl-pds">"</span></span> <span class="pl-e">ZoomSpeed</span>=<span class="pl-s"><span class="pl-pds">"</span>1.2<span class="pl-pds">"</span></span> 
+                        <span class="pl-e">ClipToBounds</span>=<span class="pl-s"><span class="pl-pds">"</span>True<span class="pl-pds">"</span></span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>DarkGray<span class="pl-pds">"</span></span> 
+                        <span class="pl-e">VerticalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Stretch<span class="pl-pds">"</span></span> <span class="pl-e">HorizontalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Stretch<span class="pl-pds">"</span></span> 
+                        Grid.Row=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> Grid.Column=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">Canvas</span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>LightGray<span class="pl-pds">"</span></span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>300<span class="pl-pds">"</span></span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>300<span class="pl-pds">"</span></span>&gt;
+                &lt;<span class="pl-ent">Rectangle</span> Canvas.Left=<span class="pl-s"><span class="pl-pds">"</span>100<span class="pl-pds">"</span></span> Canvas.Top=<span class="pl-s"><span class="pl-pds">"</span>100<span class="pl-pds">"</span></span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>50<span class="pl-pds">"</span></span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>50<span class="pl-pds">"</span></span> <span class="pl-e">Fill</span>=<span class="pl-s"><span class="pl-pds">"</span>Red<span class="pl-pds">"</span></span>/&gt;
+            &lt;/<span class="pl-ent">Canvas</span>&gt;
+        &lt;/<span class="pl-ent">paz</span><span class="pl-ent">:</span><span class="pl-ent">ZoomBorder</span>&gt;
+    &lt;/<span class="pl-ent">Grid</span>&gt;
+&lt;/<span class="pl-ent">Window</span>&gt;</pre></div>
+
+<p><code>MainWindow.xaml.cs</code></p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> Avalonia<span class="pl-k">;</span>
+<span class="pl-k">using</span> Avalonia.Controls<span class="pl-k">;</span>
+<span class="pl-k">using</span> Avalonia.Controls.PanAndZoom<span class="pl-k">;</span>
+<span class="pl-k">using</span> Avalonia.Input<span class="pl-k">;</span>
+<span class="pl-k">using</span> Avalonia.Markup.Xaml<span class="pl-k">;</span>
+
+<span class="pl-k">namespace</span> <span class="pl-en">AvaloniaDemo</span>
+{
+    <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">MainWindow</span> : <span class="pl-k">Window</span>
+    {
+        <span class="pl-k">private</span> ZoomBorder zoomBorder;
+
+        <span class="pl-k">public</span> <span class="pl-en">MainWindow</span>()
+        {
+            <span class="pl-c1">this</span>.InitializeComponent();
+            <span class="pl-c1">this</span>.AttachDevTools();
+
+            zoomBorder = <span class="pl-c1">this</span>.Find&lt;ZoomBorder&gt;(<span class="pl-s"><span class="pl-pds">"</span>zoomBorder<span class="pl-pds">"</span></span>);
+            zoomBorder.KeyDown += ZoomBorder_KeyDown;
+        }
+
+        <span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">InitializeComponent</span>()
+        {
+            AvaloniaXamlLoader.Load(<span class="pl-c1">this</span>);
+        }
+
+        <span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">ZoomBorder_KeyDown</span>(<span class="pl-k">object</span> <span class="pl-smi">sender</span>, <span class="pl-k">KeyEventArgs</span> <span class="pl-smi">e</span>)
+        {
+            <span class="pl-k">if</span> (e.Key == Key.E)
+            {
+                zoomBorder.Extent();
+            }
+
+            <span class="pl-k">if</span> (e.Key == Key.F)
+            {
+                zoomBorder.Fill();
+            }
+
+            <span class="pl-k">if</span> (e.Key == Key.R)
+            {
+                zoomBorder.Reset();
+            }
+
+            <span class="pl-k">if</span> (e.Key == Key.T)
+            {
+                zoomBorder.ToggleAutoFitMode();
+                zoomBorder.AutoFit();
+            }
+        }
+    }
+}</pre></div>
+
+<h3>
+<a id="wpf" class="anchor" href="#wpf" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WPF</h3>
+
+<p><code>MainWindow.xaml</code></p>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">Window</span> <span class="pl-e">x</span><span class="pl-e">:</span><span class="pl-e">Class</span>=<span class="pl-s"><span class="pl-pds">"</span>WpfDemo.MainWindow<span class="pl-pds">"</span></span>
+        <span class="pl-e">xmlns</span>=<span class="pl-s"><span class="pl-pds">"</span>http://schemas.microsoft.com/winfx/2006/xaml/presentation<span class="pl-pds">"</span></span>
+        <span class="pl-e">xmlns</span><span class="pl-e">:</span><span class="pl-e">x</span>=<span class="pl-s"><span class="pl-pds">"</span>http://schemas.microsoft.com/winfx/2006/xaml<span class="pl-pds">"</span></span>
+        <span class="pl-e">xmlns</span><span class="pl-e">:</span><span class="pl-e">paz</span>=<span class="pl-s"><span class="pl-pds">"</span>clr-namespace:Wpf.Controls.PanAndZoom;assembly=Wpf.Controls.PanAndZoom<span class="pl-pds">"</span></span>
+        <span class="pl-e">WindowStartupLocation</span>=<span class="pl-s"><span class="pl-pds">"</span>CenterScreen<span class="pl-pds">"</span></span>
+        <span class="pl-e">UseLayoutRounding</span>=<span class="pl-s"><span class="pl-pds">"</span>True<span class="pl-pds">"</span></span> <span class="pl-e">SnapsToDevicePixels</span>=<span class="pl-s"><span class="pl-pds">"</span>True<span class="pl-pds">"</span></span> TextOptions.TextFormattingMode=<span class="pl-s"><span class="pl-pds">"</span>Display<span class="pl-pds">"</span></span>
+        <span class="pl-e">Title</span>=<span class="pl-s"><span class="pl-pds">"</span>PanAndZoom WPF Demo<span class="pl-pds">"</span></span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>640<span class="pl-pds">"</span></span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>640<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">Grid</span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>SlateBlue<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">Grid</span>.RowDefinitions&gt;
+            &lt;<span class="pl-ent">RowDefinition</span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>Auto<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">RowDefinition</span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">RowDefinition</span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>24<span class="pl-pds">"</span></span>/&gt;
+        &lt;/<span class="pl-ent">Grid</span>.RowDefinitions&gt;
+        &lt;<span class="pl-ent">Grid</span>.ColumnDefinitions&gt;
+            &lt;<span class="pl-ent">ColumnDefinition</span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>50<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">ColumnDefinition</span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">ColumnDefinition</span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>50<span class="pl-pds">"</span></span>/&gt;
+        &lt;/<span class="pl-ent">Grid</span>.ColumnDefinitions&gt;
+        &lt;<span class="pl-ent">StackPanel</span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>#1FFFFFFF<span class="pl-pds">"</span></span> <span class="pl-e">Margin</span>=<span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span> 
+                    <span class="pl-e">HorizontalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Center<span class="pl-pds">"</span></span> <span class="pl-e">VerticalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Top<span class="pl-pds">"</span></span> 
+                    Grid.Row=<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span> Grid.Column=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>E - Extent<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>F - Fill<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>R - Reset<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>T - Toggle AutoFitMode<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>Mouse Wheel - Zoom to Point<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">TextBlock</span> <span class="pl-e">Text</span>=<span class="pl-s"><span class="pl-pds">"</span>Mouse Right Button Down - Pan<span class="pl-pds">"</span></span> <span class="pl-e">Foreground</span>=<span class="pl-s"><span class="pl-pds">"</span>WhiteSmoke<span class="pl-pds">"</span></span> <span class="pl-e">FontSize</span>=<span class="pl-s"><span class="pl-pds">"</span>11<span class="pl-pds">"</span></span>/&gt;
+        &lt;/<span class="pl-ent">StackPanel</span>&gt;
+        &lt;<span class="pl-ent">paz</span><span class="pl-ent">:</span><span class="pl-ent">ZoomBorder</span> <span class="pl-e">x</span><span class="pl-e">:</span><span class="pl-e">Name</span>=<span class="pl-s"><span class="pl-pds">"</span>zoomBorder<span class="pl-pds">"</span></span> <span class="pl-e">AutoFitMode</span>=<span class="pl-s"><span class="pl-pds">"</span>None<span class="pl-pds">"</span></span> <span class="pl-e">ZoomSpeed</span>=<span class="pl-s"><span class="pl-pds">"</span>1.2<span class="pl-pds">"</span></span> <span class="pl-e">ClipToBounds</span>=<span class="pl-s"><span class="pl-pds">"</span>True<span class="pl-pds">"</span></span> 
+                        <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>DarkGray<span class="pl-pds">"</span></span> 
+                        <span class="pl-e">VerticalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Stretch<span class="pl-pds">"</span></span> <span class="pl-e">HorizontalAlignment</span>=<span class="pl-s"><span class="pl-pds">"</span>Stretch<span class="pl-pds">"</span></span> 
+                        Grid.Row=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span> Grid.Column=<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">Canvas</span> <span class="pl-e">Background</span>=<span class="pl-s"><span class="pl-pds">"</span>LightGray<span class="pl-pds">"</span></span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>300<span class="pl-pds">"</span></span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>300<span class="pl-pds">"</span></span>&gt;
+                &lt;<span class="pl-ent">Rectangle</span> Canvas.Left=<span class="pl-s"><span class="pl-pds">"</span>100<span class="pl-pds">"</span></span> Canvas.Top=<span class="pl-s"><span class="pl-pds">"</span>100<span class="pl-pds">"</span></span> <span class="pl-e">Width</span>=<span class="pl-s"><span class="pl-pds">"</span>50<span class="pl-pds">"</span></span> <span class="pl-e">Height</span>=<span class="pl-s"><span class="pl-pds">"</span>50<span class="pl-pds">"</span></span> <span class="pl-e">Fill</span>=<span class="pl-s"><span class="pl-pds">"</span>Red<span class="pl-pds">"</span></span>/&gt;
+            &lt;/<span class="pl-ent">Canvas</span>&gt;
+        &lt;/<span class="pl-ent">paz</span><span class="pl-ent">:</span><span class="pl-ent">ZoomBorder</span>&gt;
+    &lt;/<span class="pl-ent">Grid</span>&gt;
+&lt;/<span class="pl-ent">Window</span>&gt;</pre></div>
+
+<p><code>MainWindow.xaml.cs</code></p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">using</span> System.Windows<span class="pl-k">;</span>
+<span class="pl-k">using</span> System.Windows.Input<span class="pl-k">;</span>
+
+<span class="pl-k">namespace</span> <span class="pl-en">WpfDemo</span>
+{
+    <span class="pl-k">public</span> <span class="pl-k">partial</span> <span class="pl-k">class</span> <span class="pl-en">MainWindow</span> : <span class="pl-k">Window</span>
+    {
+        <span class="pl-k">public</span> <span class="pl-en">MainWindow</span>()
+        {
+            InitializeComponent();
+
+            zoomBorder.KeyDown += ZoomBorder_KeyDown;
+        }
+
+        <span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">ZoomBorder_KeyDown</span>(<span class="pl-k">object</span> <span class="pl-smi">sender</span>, <span class="pl-k">KeyEventArgs</span> <span class="pl-smi">e</span>)
+        {
+            <span class="pl-k">if</span> (e.Key == Key.E)
+            {
+                zoomBorder.Extent();
+            }
+
+            <span class="pl-k">if</span> (e.Key == Key.F)
+            {
+                zoomBorder.Fill();
+            }
+
+            <span class="pl-k">if</span> (e.Key == Key.R)
+            {
+                zoomBorder.Reset();
+            }
+
+            <span class="pl-k">if</span> (e.Key == Key.T)
+            {
+                zoomBorder.ToggleAutoFitMode();
+                zoomBorder.AutoFit();
+            }
+        }
+    }
+}</pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>PanAndZoom is licensed under the <a href="LICENSE.TXT">MIT license</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/wieslawsoltes/MatrixPanAndZoomDemo">PanAndZoom</a> is maintained by <a href="https://github.com/wieslawsoltes">wieslawsoltes</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
